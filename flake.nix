@@ -12,7 +12,7 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
-      devShells."${system}".default = with pkgs;
+      devShells."${system}".default =
         devenv.lib.mkShell {
           inherit inputs pkgs;
 
@@ -25,7 +25,7 @@
               };
 
               packages =
-                [ gamenetworkingsockets lldb_16 cz-cli yarn cz-cli yarn ];
+                with pkgs; [ gamenetworkingsockets lldb_16 cz-cli yarn ];
 
               pre-commit.hooks = {
                 deadnix.enable = true;
